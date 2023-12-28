@@ -1,45 +1,38 @@
 import java.util.*;
 public class Main {
     public static void main(String[] args) {
-        String[] strings = {"ab", "a"};
-        System.out.println(longestCommonPrefix(strings));
+        int[] numsOneTwo = new int[]{1, 3, 7};
+        int[] numsThreeFourFive = new int[]{1, 3, 5, 7};
+        int[] numsSix = new int[]{1, 4};
+        int[] empty = new int[]{};
+        int[] numsEleven = new int[]{1, 2, 4, 6, 7};
+        System.out.println("Case one: " + (searchInsert(numsOneTwo, 2) == 1));
+        System.out.println("Case two: " + (searchInsert(numsOneTwo, 5) == 2));
+        System.out.println("Case three: " + (searchInsert(numsThreeFourFive, 2) == 1));
+        System.out.println("Case four: " + (searchInsert(numsThreeFourFive, 4) == 2));
+        System.out.println("Case five: " + (searchInsert(numsThreeFourFive, 6) == 3));
+        System.out.println("Case six: " + (searchInsert(numsSix, 3) == 1));
+        System.out.println("Case seven: " + (searchInsert(numsThreeFourFive, 1) == 0));
+        System.out.println("Case eight: " + (searchInsert(numsThreeFourFive, 7) == 3));
+        System.out.println("Case nine: " + (searchInsert(empty, 2) == 0));
+        System.out.println("Case ten: " + (searchInsert(numsThreeFourFive, 5) == 2));
+        System.out.println("Case eleven: " + (searchInsert(numsEleven, 3) == 2));
 
     }
-
-    public static String longestCommonPrefix(String[] strs) {
-        if(strs.length == 0){
-            return "";
+    public static int searchInsert(int[] nums, int target) {
+        if (nums.length == 0 || nums[0] >= target) {
+            return 0;
+        } else if (nums[nums.length - 1] < target) {
+            return nums.length;
         }
-        boolean running = true;
-        String prefix = "";
-        boolean isPrefix = true;
-        int i = 0;
-        char curChar = 'T';
-        int smallestIndex = 0;
-        for(int j = 1; j < strs.length; j++){
-            if (strs[smallestIndex].length() > strs[j].length()){
-                    smallestIndex = j;
+        else if(nums[nums.length - 1] == target){
+            return nums.length - 1;
+        }
+        for(int i = 0; i < nums.length; i++){
+            if(target <= nums[i]){
+                return i;
             }
         }
-        while(running){
-            if(strs[smallestIndex].length() == 0 || i > strs[smallestIndex].length() - 1){
-                running = false;
-                isPrefix = false;
-            }
-            else {
-                curChar = strs[0].charAt(i);
-            }
-            for(int j = 1; j < strs.length; j++){
-                if(i < strs[j].length() && strs[j].charAt(i) != curChar){
-                    isPrefix = false;
-                    running = false;
-                }
-            }
-            if(isPrefix){
-                prefix += curChar;
-            }
-            i++;
-        }
-        return prefix;
+        return -1;
     }
 }
