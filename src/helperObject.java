@@ -1,19 +1,34 @@
 import java.util.*;
 public class helperObject {
-    public boolean isSymmetric(TreeNode root) {
-        return recursiveHelper(root.right, root.left);
+    public int maxDepth(TreeNode root) {
+        if(root == null){
+            return 0;
+        }
+        return recursiveHelper(root);
     }
-    public boolean recursiveHelper(TreeNode right, TreeNode left){
-        if(right == null && left == null){
-            return true;
+    public int recursiveHelper(TreeNode root){
+        if(root == null){
+            return 0;
         }
-        else if(right == null || left == null){
-            return false;
+        else if(root.left == null && root.right == null){
+            return 1;
         }
-        else if(right.val == left.val){
-            return (recursiveHelper(right.right, left.left) && recursiveHelper(right.left, left.right));
+        else if(root.left == null){
+            return 1 + recursiveHelper(root.right);
         }
-        return false;
+        else if(root.right == null){
+            return 1 + recursiveHelper(root.left);
+        }
+        else{
+            int leftVal = recursiveHelper(root.left);
+            int rightVal = recursiveHelper(root.right);
+            if(leftVal > rightVal){
+                return 1 + leftVal;
+            }
+            else{
+                return 1 + rightVal;
+            }
+        }
     }
 }
 
