@@ -1,29 +1,28 @@
 import java.util.*;
 public class helperObject {
-    public boolean hasPathSum(TreeNode root, int targetSum) {
-        if(root == null){
-            return false;
+    public String mergeAlternately(String word1, String word2) {
+        boolean onWordOne = true;
+        int indexWordOne = 0;
+        int indexWordTwo = 0;
+        StringBuilder myBuilder = new StringBuilder();
+        while(indexWordOne < word1.length() && indexWordTwo < word2.length()){
+            if(onWordOne){
+                myBuilder.append(word1.charAt(indexWordOne));
+                indexWordOne++;
+            }
+            else{
+                myBuilder.append(word2.charAt(indexWordTwo));
+                indexWordTwo++;
+            }
+            onWordOne = !onWordOne;
         }
-        return helperMethod(root, targetSum, 0);
-    }
-    public boolean helperMethod(TreeNode root, int targetSum, int curSum){
-        if(curSum + root.val == targetSum && root.right == null && root.left == null){
-            return true;
+        if(indexWordOne < word1.length()){
+            myBuilder.append(word1.substring(indexWordOne));
         }
-        else if(root.left == null && root.right == null){
-            return false;
+        else if(indexWordTwo < word2.length()){
+            myBuilder.append(word2.substring(indexWordTwo));
         }
-        else if(root.left != null && root.right != null){
-            return (helperMethod(root.left, targetSum, curSum + root.val) || helperMethod(root.right, targetSum, curSum + root.val));
-        }
-        else if(root.left != null){
-            return helperMethod(root.left, targetSum, curSum + root.val);
-        }
-        else if(root.right != null){
-            return helperMethod(root.right, targetSum, curSum + root.val);
-        }
-        return false;
-
+        return myBuilder.toString();
     }
 }
 
