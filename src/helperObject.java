@@ -1,34 +1,26 @@
 import java.util.*;
 public class helperObject {
-    public int maxDepth(TreeNode root) {
+    public boolean hasPathSum(TreeNode root, int targetSum) {
         if(root == null){
-            return 0;
+            return false;
         }
-        return recursiveHelper(root);
+        return helperMethod(root, targetSum, 0);
     }
-    public int recursiveHelper(TreeNode root){
-        if(root == null){
-            return 0;
+    public boolean helperMethod(TreeNode root, int targetSum, int curSum){
+        if(curSum + root.val == targetSum && root.right == null && root.left == null){
+            return true;
         }
-        else if(root.left == null && root.right == null){
-            return 1;
+        else if(root.left != null && root.right != null){
+            return (helperMethod(root.left, targetSum, curSum + root.val) || helperMethod(root.right, targetSum, curSum + root.val));
         }
-        else if(root.left == null){
-            return 1 + recursiveHelper(root.right);
+        else if(root.left != null){
+            return helperMethod(root.left, targetSum, curSum + root.val);
         }
-        else if(root.right == null){
-            return 1 + recursiveHelper(root.left);
+        else if(root.right != null){
+            return helperMethod(root.right, targetSum, curSum + root.val);
         }
-        else{
-            int leftVal = recursiveHelper(root.left);
-            int rightVal = recursiveHelper(root.right);
-            if(leftVal > rightVal){
-                return 1 + leftVal;
-            }
-            else{
-                return 1 + rightVal;
-            }
-        }
+        return false;
+
     }
 }
 
