@@ -1,15 +1,17 @@
 import java.util.*;
 public class helperObject {
-    public boolean isSameTree(TreeNode p, TreeNode q) {
-        return recursiveHelper(p, q);
+    public boolean isSymmetric(TreeNode root) {
+        return recursiveHelper(root.right, root.left);
     }
-    public boolean recursiveHelper(TreeNode p, TreeNode q) {
-        if (p == null && q == null) {
+    public boolean recursiveHelper(TreeNode right, TreeNode left){
+        if(right == null && left == null){
             return true;
-        } else if (p == null || q == null) {
+        }
+        else if(right == null || left == null){
             return false;
-        } else if (p.val == q.val) {
-            return (recursiveHelper(p.right, q.right) && recursiveHelper(p.left, q.left));
+        }
+        else if(right.val == left.val){
+            return (recursiveHelper(right.right, left.left) && recursiveHelper(right.left, left.right));
         }
         return false;
     }
