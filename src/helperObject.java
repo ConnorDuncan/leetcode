@@ -10,6 +10,9 @@ public class helperObject {
         if(curSum + root.val == targetSum && root.right == null && root.left == null){
             return true;
         }
+        else if(root.left == null && root.right == null){
+            return false;
+        }
         else if(root.left != null && root.right != null){
             return (helperMethod(root.left, targetSum, curSum + root.val) || helperMethod(root.right, targetSum, curSum + root.val));
         }
