@@ -1,44 +1,20 @@
 import java.util.*;
 public class helperObject {
-    public ListNode deleteDuplicates(ListNode head) {
-        HashSet<Integer> myHash = new HashSet<Integer>();
-        if(head == null){
-            return null;
+    public boolean isSameTree(TreeNode p, TreeNode q) {
+        return recursiveHelper(p, q);
+    }
+    public boolean recursiveHelper(TreeNode p, TreeNode q){
+        if(p == null && q == null){
+            return true;
         }
-        else if(head.next == null){
-            return head;
+        else if(p == null || q == null){
+            return false;
         }
-        ListNode cur = head.next;
-        ListNode prev = head;
-        myHash.add(head.val);
-        while(cur.next != null){
-            if(!myHash.contains(cur.val)){
-                myHash.add(cur.val);
-                prev = cur;
-                cur = cur.next;
-            }
-            else{
-                prev.next = cur.next;
-                cur = prev.next;
-            }
+        else if(p.val == q.val){
+            return (recursiveHelper(p.right, q.right) && recursiveHelper(p.left, q.left));
         }
-        if(myHash.contains(cur.val)){
-            prev.next = null;
-        }
-        return head;
-/*
-More efficient solution:
-ListNode current = head;
-while (current != null && current.next != null) {
-            if (current.val == current.next.val) {
-                current.next = current.next.next; // Skip the duplicate node
-            } else {
-                current = current.next;
-            }
-}
-return head;
- */
-
+        return false;
+    }
     }
 }
 
