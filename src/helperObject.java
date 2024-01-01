@@ -1,13 +1,21 @@
 import java.util.*;
 public class helperObject {
-    public int titleToNumber(String columnTitle) {
-        int sum = 0;
-        int j = 0;
-        for(int i = columnTitle.length() - 1; i > -1; i--){
-            sum += (columnTitle.charAt(i) - 64) * Math.pow(26, j);
-            j++;
+    public ListNode reverseList(ListNode head) {
+        if(head == null){
+            return null;
         }
-        return sum;
+        else if(head.next == null){
+            return head;
+        }
+        ListNode tail = new ListNode(head.val);
+        while(head.next != null){
+            ListNode temp = new ListNode(head.next.val);
+            temp.next = tail;
+            tail = temp;
+            head = head.next;
+        }
+
+        return tail;
     }
 }
 
