@@ -1,27 +1,22 @@
 import java.util.*;
 public class helperObject {
-    public TreeNode invertTree(TreeNode root) {
-        return recursiveHelper(root);
-    }
-    public TreeNode recursiveHelper(TreeNode root){
-        if(root == null){
-            return null;
+    public boolean isPowerOfTwo(int n) {
+        if(n < 0){
+            return false;
         }
-        else if(root.left == null && root.right == null){
-            return root;
+        String binary = Integer.toBinaryString(n);
+        boolean seenOne = false;
+        for(int i = 0; i < binary.length(); i++){
+            if(binary.charAt(i) == '1'){
+                if(seenOne){
+                    return false;
+                }
+                else{
+                    seenOne = true;
+                }
+            }
         }
-        else if(root.left == null){
-            return new TreeNode(root.val, recursiveHelper(root.right), null);
-        }
-        else if(root.right == null){
-            return new TreeNode(root.val, null, recursiveHelper(root.left));
-        }
-        else{
-            TreeNode newLeft = recursiveHelper(root.right);
-            TreeNode newRight = recursiveHelper(root.left);
-            return new TreeNode(root.val, newLeft, newRight);
-        }
-
+        return seenOne;
     }
 }
 
