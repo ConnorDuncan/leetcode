@@ -1,21 +1,25 @@
 import java.util.*;
 public class helperObject {
-    public int singleNumber(int[] nums) {
-        HashSet<Integer> numsRead = new HashSet<Integer>();
-        HashSet<Integer> nonDupeNums = new HashSet<Integer>();
+    public int majorityElement(int[] nums) {
+        HashMap<Integer, Integer> myMap = new HashMap<Integer, Integer>();
         for(int i = 0; i < nums.length; i++){
-            if(!numsRead.contains(nums[i])){
-                numsRead.add(nums[i]);
-                nonDupeNums.add(nums[i]);
+            if(!myMap.containsKey(nums[i])){
+                myMap.put(nums[i], 1);
             }
             else{
-                nonDupeNums.remove(nums[i]);
+                myMap.put(nums[i], myMap.get(nums[i]) + 1);
             }
         }
-        for(int j : nonDupeNums){
-            return j;
+        int max = 0;
+        int val = 0;
+        for(int i = 0; i < nums.length; i++){
+            int tempVal = myMap.get(nums[i]);
+            if(tempVal > max){
+                max = tempVal;
+                val = nums[i];
+            }
         }
-        return -1;
+        return val;
     }
 }
 
