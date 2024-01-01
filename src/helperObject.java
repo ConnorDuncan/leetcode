@@ -1,22 +1,27 @@
 import java.util.*;
 public class helperObject {
-    public int countNodes(TreeNode root) {
-        return helperMethod(root);
+    public TreeNode invertTree(TreeNode root) {
+        return recursiveHelper(root);
     }
-    public int helperMethod(TreeNode root){
+    public TreeNode recursiveHelper(TreeNode root){
         if(root == null){
-            return 0;
+            return null;
         }
         else if(root.left == null && root.right == null){
-            return 1;
+            return root;
         }
         else if(root.left == null){
-            return 1 + helperMethod(root.right);
+            return new TreeNode(root.val, recursiveHelper(root.right), null);
         }
         else if(root.right == null){
-            return 1 + helperMethod(root.left);
+            return new TreeNode(root.val, null, recursiveHelper(root.left));
         }
-        return 1 + helperMethod(root.left) + helperMethod(root.right);
+        else{
+            TreeNode newLeft = recursiveHelper(root.right);
+            TreeNode newRight = recursiveHelper(root.left);
+            return new TreeNode(root.val, newLeft, newRight);
+        }
+
     }
 }
 
