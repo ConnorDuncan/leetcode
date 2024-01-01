@@ -1,13 +1,22 @@
 import java.util.*;
 public class helperObject {
-    public boolean containsDuplicate(int[] nums) {
-        HashSet<Integer> mySet = new HashSet<Integer>();
-        for(int i : nums){
-            if(!mySet.add(i)){
-                return true;
-            }
+    public int countNodes(TreeNode root) {
+        return helperMethod(root);
+    }
+    public int helperMethod(TreeNode root){
+        if(root == null){
+            return 0;
         }
-        return false;
+        else if(root.left == null && root.right == null){
+            return 1;
+        }
+        else if(root.left == null){
+            return 1 + helperMethod(root.right);
+        }
+        else if(root.right == null){
+            return 1 + helperMethod(root.left);
+        }
+        return 1 + helperMethod(root.left) + helperMethod(root.right);
     }
 }
 
