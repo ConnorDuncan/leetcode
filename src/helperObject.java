@@ -1,53 +1,31 @@
 import java.util.*;
 public class helperObject {
-    /*
-    public String mergeAlternately(String word1, String word2) {
-        boolean onWordOne = true;
-        int indexWordOne = 0;
-        int indexWordTwo = 0;
-        StringBuilder myBuilder = new StringBuilder();
-        while(indexWordOne < word1.length() && indexWordTwo < word2.length()){
-            if(onWordOne){
-                myBuilder.append(word1.charAt(indexWordOne));
-                indexWordOne++;
-            }
-            else{
-                myBuilder.append(word2.charAt(indexWordTwo));
-                indexWordTwo++;
-            }
-            onWordOne = !onWordOne;
+    public int minDepth(TreeNode root) {
+        if(root == null){
+            return 0;
         }
-        if(indexWordOne < word1.length()){
-            myBuilder.append(word1.substring(indexWordOne));
-        }
-        else if(indexWordTwo < word2.length()){
-            myBuilder.append(word2.substring(indexWordTwo));
-        }
-        return myBuilder.toString();
+        return helperMethod(root);
     }
-    */
-    public String mergeAlternately(String word1, String word2) {
-        int maxIndex = 0;
-        int min = 0;
-        if(word1.length() < word2.length()){
-            min = word1.length();
+    public int helperMethod(TreeNode root){
+        if(root.left == null && root.right == null){
+            return 1;
+        }
+        else if(root.left == null){
+            return 1 + helperMethod(root.right);
+        }
+        else if(root.right == null){
+            return 1 + helperMethod(root.left);
         }
         else{
-            min = word2.length();
+            int left = helperMethod(root.left);
+            int right = helperMethod(root.right);
+            if(left > right){
+                return 1 + right;
+            }
+            else{
+                return 1 + left;
+            }
         }
-        StringBuilder myBuilder = new StringBuilder();
-        for(int i = 0; i < min; i++){
-            myBuilder.append(word1.charAt(i));
-            myBuilder.append(word2.charAt(i));
-            maxIndex++;
-        }
-        if(word1.length() > maxIndex){
-            myBuilder.append(word1.substring(maxIndex));
-        }
-        else if(maxIndex < word2.length()){
-            myBuilder.append(word2.substring(maxIndex));
-        }
-        return myBuilder.toString();
     }
 }
 
