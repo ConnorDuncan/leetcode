@@ -1,7 +1,10 @@
 import java.util.*;
 public class helperObject {
     public boolean isPowerOfTwo(int n) {
-        if(n < 0){
+        if(n == 1){
+            return true;
+        }
+        if(n < 0 || n % 2 == 1){
             return false;
         }
         String binary = Integer.toBinaryString(n);
