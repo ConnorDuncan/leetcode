@@ -1,30 +1,15 @@
 import java.util.*;
 public class helperObject {
-    public List<Integer> inorderTraversal(TreeNode root) {
-        ArrayList<Integer> myArray = new ArrayList<Integer>();
-        recursiveHelper(root, myArray);
-        return myArray;
-    }
-    public void recursiveHelper(TreeNode root, ArrayList<Integer> myArray){
-        if(root == null){
-            return;
+    public int[][] transpose(int[][] matrix) {
+        int r = matrix[0].length;
+        int c = matrix.length;
+        int[][] transpose = new int[r][c];
+        for(int i = 0; i < c; i++){
+            for(int j = 0; j < r; j++){
+                transpose[j][i] = matrix[i][j];
+            }
         }
-        else if(root.left == null && root.right == null){
-            myArray.add(root.val);
-        }
-        else if(root.left == null){
-            myArray.add(root.val);
-            recursiveHelper(root.right, myArray);
-        }
-        else if(root.right == null){
-            recursiveHelper(root.left, myArray);
-            myArray.add(root.val);
-        }
-        else{
-            recursiveHelper(root.left, myArray);
-            myArray.add(root.val);
-            recursiveHelper(root.right, myArray);
-        }
+        return transpose;
     }
 
 }
