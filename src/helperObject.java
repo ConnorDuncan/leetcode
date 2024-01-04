@@ -1,24 +1,29 @@
 import java.util.*;
 public class helperObject {
-    public boolean makeEqual(String[] words) {
-        HashMap<Character, Integer> myMap = new HashMap<Character, Integer>();
-        for(String s : words){
-            for(int i = 0; i < s.length(); i++){
-                char c = s.charAt(i);
-                if(myMap.containsKey(c)){
-                    myMap.put(c, myMap.get(c) + 1);
-                }
-                else{
-                    myMap.put(c, 1);
-                }
+    public int buyChoco(int[] prices, int money) {
+        int min = prices[0];
+        int minSecond = prices[1];
+        if(minSecond < min){
+            int temp = minSecond;
+            minSecond = min;
+            min = temp;
+        }
+        for(int i = 2; i < prices.length; i++){
+            if(minSecond > prices[i]){
+                minSecond = prices[i];
+            }
+            if(minSecond < min){
+                int temp = minSecond;
+                minSecond = min;
+                min = temp;
             }
         }
-        for(char c : myMap.keySet()){
-            if(myMap.get(c) % words.length != 0){
-                return false;
-            }
+        if(min + minSecond > money){
+            return money;
         }
-        return true;
+        else{
+            return money - min - minSecond;
+        }
     }
 }
 
