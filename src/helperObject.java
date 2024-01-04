@@ -1,23 +1,30 @@
 import java.util.*;
 public class helperObject {
-    public String largestOddNumber(String num) {
-        StringBuilder builder = new StringBuilder(num);
-        num = builder.reverse().toString();
-        boolean isOdd = false;
-        int i = 0;
-        builder = new StringBuilder();
-        while (!isOdd && i < num.length()){
-            char c = num.charAt(i);
-            if((c - 48) % 2 == 1){
-                isOdd = true;
-                builder.append(c);
-            }
-            i++;
+    public List<Integer> inorderTraversal(TreeNode root) {
+        ArrayList<Integer> myArray = new ArrayList<Integer>();
+        recursiveHelper(root, myArray);
+        return myArray;
+    }
+    public void recursiveHelper(TreeNode root, ArrayList<Integer> myArray){
+        if(root == null){
+            return;
         }
-        if(i < num.length()){
-            builder.append(num.substring(i));
+        else if(root.left == null && root.right == null){
+            myArray.add(root.val);
         }
-        return builder.reverse().toString();
+        else if(root.left == null){
+            myArray.add(root.val);
+            recursiveHelper(root.right, myArray);
+        }
+        else if(root.right == null){
+            recursiveHelper(root.left, myArray);
+            myArray.add(root.val);
+        }
+        else{
+            recursiveHelper(root.left, myArray);
+            myArray.add(root.val);
+            recursiveHelper(root.right, myArray);
+        }
     }
 
 }
