@@ -1,8 +1,17 @@
 import java.util.*;
 public class helperObject {
-    public int maxProduct(int[] nums) {
-        Arrays.sort(nums);
-        return (nums[nums.length - 1] - 1) * (nums[nums.length - 2] - 1);
+    public String destCity(List<List<String>> paths) {
+        HashSet<String> mySet = new HashSet<String>();
+        int r = paths.size();
+        for(int i = 0; i < r; i++){
+            mySet.add(paths.get(i).get(0));
+        }
+        for(int i = 0; i < r; i++){
+            if(!mySet.contains(paths.get(i).get(1))){
+                return paths.get(i).get(1);
+            }
+        }
+        return "error";
     }
 
 }
