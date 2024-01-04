@@ -1,52 +1,33 @@
 import java.util.*;
 public class helperObject {
-    /* O(n^2) runtime
-    public int maxScore(String s) {
-        int maxScore = -1;
-        int tempScore = 0;
-        for(int i = 1; i < s.length(); i++){
-            tempScore = 0;
-            for(int j = 0; j < i; j++){
-                if(s.charAt(j) == '0'){
-                    tempScore++;
-                }
+    public boolean isPathCrossing(String path) {
+        HashSet<Pair> mySet = new HashSet<Pair>();
+        Pair temp = new Pair(0, 0);
+        mySet.add(temp);
+        int curX = 0;
+        int curY = 0;
+        for(int i = 0; i < path.length(); i++){
+            if(path.charAt(i) == 'N'){
+                curY++;
             }
-            for(int k = i; k < s.length(); k++){
-                if(s.charAt(k) == '1'){
-                    tempScore++;
-                }
+            else if(path.charAt(i) == 'S'){
+                curY--;
             }
-            if (tempScore > maxScore){
-                maxScore = tempScore;
+            else if(path.charAt(i) == 'E'){
+                curX++;
             }
-        }
-        return maxScore;
-    }
-     */
-
-
-    // O(n) runtime
-    public int maxScore(String s) {
-        int numOnes = 0;
-        for(int i = 0; i < s.length(); i++){
-            if(s.charAt(i) == '1'){
-                numOnes++;
+            else if(path.charAt(i) == 'W'){
+                curX--;
             }
-        }
-        int numZeros = 0;
-        int ans = 0;
-        for(int i = 0; i < s.length() - 1; i++){
-            if(s.charAt(i) == '1'){
-                numOnes--;
+            temp = new Pair(curX, curY);
+            if(mySet.contains(temp)){
+                return true;
             }
             else{
-                numZeros++;
-            }
-            if(numOnes + numZeros > ans){
-                ans = numOnes + numZeros;
+                mySet.add(temp);
             }
         }
-        return ans;
+        return false;
     }
 
 }
