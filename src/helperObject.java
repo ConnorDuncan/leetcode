@@ -1,33 +1,40 @@
 import java.util.*;
 public class helperObject {
-    public boolean isPathCrossing(String path) {
-        HashSet<Pair> mySet = new HashSet<Pair>();
-        Pair temp = new Pair(0, 0);
-        mySet.add(temp);
-        int curX = 0;
-        int curY = 0;
-        for(int i = 0; i < path.length(); i++){
-            if(path.charAt(i) == 'N'){
-                curY++;
-            }
-            else if(path.charAt(i) == 'S'){
-                curY--;
-            }
-            else if(path.charAt(i) == 'E'){
-                curX++;
-            }
-            else if(path.charAt(i) == 'W'){
-                curX--;
-            }
-            temp = new Pair(curX, curY);
-            if(mySet.contains(temp)){
-                return true;
+    public int minOperations(String s) {
+        int maxOne = 0;
+        int maxTwo = 0;
+        boolean alt = false;
+        for(int i = 0; i < s.length(); i++){
+            if(alt){
+                if(s.charAt(i) != '0'){
+                    maxOne++;
+                }
             }
             else{
-                mySet.add(temp);
+                if(s.charAt(i) != '1'){
+                    maxOne++;
+                }
             }
+            alt = !alt;
         }
-        return false;
+        alt = true;
+        for(int i = 0; i < s.length(); i++){
+            if(alt){
+                if(s.charAt(i) != '0'){
+                    maxTwo++;
+                }
+            }
+            else{
+                if(s.charAt(i) != '1'){
+                    maxTwo++;
+                }
+            }
+            alt = !alt;
+        }
+        if(maxOne > maxTwo){
+            return maxTwo;
+        }
+        return maxOne;
     }
 
 }
