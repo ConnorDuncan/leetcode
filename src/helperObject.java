@@ -1,18 +1,25 @@
 import java.util.*;
 public class helperObject {
-    public int numberOfMatches(int n) {
-        int matches = 0;
-        while(n != 1){
-            if(n % 2 == 1){
-                matches += n / 2;
-                n = (n / 2) + 1;
+    public int totalMoney(int n) {
+        int sum = 1;
+        int yesterday = 1;
+        int lastMonday = 1;
+        int days = 1;
+        n--;
+        while(n != 0){
+            if(days % 7 == 0){ // it's monday
+                sum += lastMonday + 1;
+                lastMonday++;
+                yesterday = lastMonday;
             }
             else{
-                matches += n / 2;
-                n /= 2;
+                sum += yesterday + 1;
+                yesterday++;
             }
+            n--;
+            days++;
         }
-        return matches;
+        return sum;
     }
 
 }
