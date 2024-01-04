@@ -1,22 +1,24 @@
 import java.util.*;
 public class helperObject {
-    public int findContentChildren(int[] g, int[] s) {
-        int happyChildren = 0;
-        int j = 0;
-        int i = 0;
-        Arrays.sort(g);
-        Arrays.sort(s);
-        while(j < g.length && i < s.length){
-            if(g[j] <= s[i]){
-                happyChildren++;
-                j++;
-                i++;
-            }
-            else{
-                i++;
+    public boolean makeEqual(String[] words) {
+        HashMap<Character, Integer> myMap = new HashMap<Character, Integer>();
+        for(String s : words){
+            for(int i = 0; i < s.length(); i++){
+                char c = s.charAt(i);
+                if(myMap.containsKey(c)){
+                    myMap.put(c, myMap.get(c) + 1);
+                }
+                else{
+                    myMap.put(c, 1);
+                }
             }
         }
-        return happyChildren;
+        for(char c : myMap.keySet()){
+            if(myMap.get(c) % words.length != 0){
+                return false;
+            }
+        }
+        return true;
     }
 }
 
