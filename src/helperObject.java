@@ -1,18 +1,21 @@
 import java.util.*;
 public class helperObject {
     public String largestOddNumber(String num) {
-        StringBuilder builder = new StringBuilder();
+        StringBuilder builder = new StringBuilder(num);
+        num = builder.reverse().toString();
         boolean isOdd = false;
-        for(int i = num.length() - 1; i > -1; i--){
-            if(isOdd){
-                builder.append(num.charAt(i));
+        int i = 0;
+        builder = new StringBuilder();
+        while (!isOdd && i < num.length()){
+            char c = num.charAt(i);
+            if((c - 48) % 2 == 1){
+                isOdd = true;
+                builder.append(c);
             }
-            else{
-                if((num.charAt(i) - 48) % 2 == 1){
-                    isOdd = true;
-                    builder.append(num.charAt(i));
-                }
-            }
+            i++;
+        }
+        if(i < num.length()){
+            builder.append(num.substring(i));
         }
         return builder.reverse().toString();
     }
