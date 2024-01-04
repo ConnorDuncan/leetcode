@@ -1,29 +1,53 @@
 import java.util.*;
 public class helperObject {
-    public int buyChoco(int[] prices, int money) {
-        int min = prices[0];
-        int minSecond = prices[1];
-        if(minSecond < min){
-            int temp = minSecond;
-            minSecond = min;
-            min = temp;
-        }
-        for(int i = 2; i < prices.length; i++){
-            if(minSecond > prices[i]){
-                minSecond = prices[i];
+    /* O(n^2) runtime
+    public int maxScore(String s) {
+        int maxScore = -1;
+        int tempScore = 0;
+        for(int i = 1; i < s.length(); i++){
+            tempScore = 0;
+            for(int j = 0; j < i; j++){
+                if(s.charAt(j) == '0'){
+                    tempScore++;
+                }
             }
-            if(minSecond < min){
-                int temp = minSecond;
-                minSecond = min;
-                min = temp;
+            for(int k = i; k < s.length(); k++){
+                if(s.charAt(k) == '1'){
+                    tempScore++;
+                }
+            }
+            if (tempScore > maxScore){
+                maxScore = tempScore;
             }
         }
-        if(min + minSecond > money){
-            return money;
-        }
-        else{
-            return money - min - minSecond;
-        }
+        return maxScore;
     }
+     */
+
+
+    // O(n) runtime
+    public int maxScore(String s) {
+        int numOnes = 0;
+        for(int i = 0; i < s.length(); i++){
+            if(s.charAt(i) == '1'){
+                numOnes++;
+            }
+        }
+        int numZeros = 0;
+        int ans = 0;
+        for(int i = 0; i < s.length() - 1; i++){
+            if(s.charAt(i) == '1'){
+                numOnes--;
+            }
+            else{
+                numZeros++;
+            }
+            if(numOnes + numZeros > ans){
+                ans = numOnes + numZeros;
+            }
+        }
+        return ans;
+    }
+
 }
 
