@@ -1,25 +1,20 @@
 import java.util.*;
 public class helperObject {
-    public int totalMoney(int n) {
-        int sum = 1;
-        int yesterday = 1;
-        int lastMonday = 1;
-        int days = 1;
-        n--;
-        while(n != 0){
-            if(days % 7 == 0){ // it's monday
-                sum += lastMonday + 1;
-                lastMonday++;
-                yesterday = lastMonday;
+    public String largestOddNumber(String num) {
+        StringBuilder builder = new StringBuilder();
+        boolean isOdd = false;
+        for(int i = num.length() - 1; i > -1; i--){
+            if(isOdd){
+                builder.append(num.charAt(i));
             }
             else{
-                sum += yesterday + 1;
-                yesterday++;
+                if((num.charAt(i) - 48) % 2 == 1){
+                    isOdd = true;
+                    builder.append(num.charAt(i));
+                }
             }
-            n--;
-            days++;
         }
-        return sum;
+        return builder.reverse().toString();
     }
 
 }
