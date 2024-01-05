@@ -1,22 +1,30 @@
 import java.util.*;
 public class helperObject {
-    public int minOperations(List<Integer> nums, int k) {
-        ArrayList<Integer> numsAfter = new ArrayList<Integer>();
-        int steps = 0;
-        for(int i = nums.size() - 1; i > -1; i--){
-            numsAfter.add(nums.get(i));
-            steps++;
-            boolean isDone = true;
-            for(int j = 1; j <= k; j++){
-                if(!numsAfter.contains(j)){
-                    isDone = false;
+    public int maxArea(int[] height) {
+        int max = 0;
+        int left = 0;
+        int right = height.length - 1;
+        while(left < right){
+            if(height[left] > height[right]){
+                int temp = (right-left) * height[right];
+                if(temp > max){
+                    max = temp;
                 }
             }
-            if(isDone){
-                return steps;
+            else{
+                int temp = (right-left) * height[left];
+                if(temp > max){
+                    max = temp;
+                }
+            }
+            if(height[left]>height[right]){
+                right--;
+            }
+            else{
+                left++;
             }
         }
-        return -1;
+        return max;
     }
 
 }
