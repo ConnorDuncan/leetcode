@@ -1,29 +1,26 @@
 import java.util.*;
 public class helperObject {
-    public ListNode removeElements(ListNode head, int val) {
+    public boolean isPalindrome(ListNode head) {
+        StringBuilder builder = new StringBuilder();
         if(head == null){
-            return null;
+            return true;
         }
         else if(head.next == null){
-            if(head.val == val){
-                return null;
-            }
-            return head;
+            return true;
         }
-        while(head != null && head.val == val){
+        while(head.next != null){
+            builder.append(head.val);
             head = head.next;
         }
-        if(head == null){
-            return null;
-        }
-        ListNode cur = head;
-        while(cur != null && cur.next != null){
-            while(cur.next != null && cur.next.val == val){
-                cur.next = cur.next.next;
+        builder.append(head.val);
+        String s = builder.toString();
+        int len = s.length();
+        for(int i = 0; i < len / 2; i++){
+            if(s.charAt(i) != s.charAt(len - 1 - i)){
+                return false;
             }
-            cur = cur.next;
         }
-        return head;
+        return true;
     }
 
 }
