@@ -1,19 +1,21 @@
 import java.util.*;
 public class helperObject {
-    public char findTheDifference(String s, String t) {
-        int[] count = new int[26];
-        for(int i = 0; i < s.length(); i++){
-            count[s.charAt(i) - 97]++;
-        }
-        for(int i = 0; i < t.length(); i++){
-            count[t.charAt(i) - 97]--;
-        }
-        for(int i = 0; i < 26; i++){
-            if(count[i] == -1){
-                return (char)(97 + i);
+    public boolean isSubsequence(String s, String t) {
+        int i = 0;
+        int j = 0;
+        while(i < s.length() && j < t.length()){
+            if(s.charAt(i) == t.charAt(j)){
+                i++;
+                j++;
+            }
+            else{
+                j++;
             }
         }
-        return 'a';
+        if(i < s.length()){
+            return false;
+        }
+        return true;
     }
 }
 
