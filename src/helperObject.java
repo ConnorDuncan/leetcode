@@ -1,17 +1,27 @@
 import java.util.*;
 public class helperObject {
-    public int addDigits(int num) {
-        String s = "" + num;
-        int result = num;
-        while(result > 9){
-            result = 0;
-            for(int i = 0; i < s.length(); i++){
-                int temp = s.charAt(i) - 48;
-                result += temp;
-            }
-            s = "" + result;
+    public boolean isUgly(int n) {
+        if(n <= 0){
+            return false;
         }
-        return result;
+        else if(n == 1){
+            return true;
+        }
+        while(n % 2 == 0 || n % 3 == 0 || n % 5 == 0){
+            if(n%5 == 0){
+                n /= 5;
+            }
+            else if(n%3 == 0){
+                n /= 3;
+            }
+            else{
+                n /= 2;
+            }
+        }
+        if(n == 1){
+            return true;
+        }
+        return false;
     }
 
 }
