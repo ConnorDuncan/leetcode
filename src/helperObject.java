@@ -1,30 +1,30 @@
 import java.util.*;
 public class helperObject {
-    public int maxArea(int[] height) {
-        int max = 0;
-        int left = 0;
-        int right = height.length - 1;
-        while(left < right){
-            if(height[left] > height[right]){
-                int temp = (right-left) * height[right];
-                if(temp > max){
-                    max = temp;
-                }
-            }
-            else{
-                int temp = (right-left) * height[left];
-                if(temp > max){
-                    max = temp;
-                }
-            }
-            if(height[left]>height[right]){
-                right--;
-            }
-            else{
-                left++;
-            }
+    public List<Integer> preorderTraversal(TreeNode root) {
+        ArrayList<Integer> myArray = new ArrayList<Integer>();
+        recursiveHelper(root, myArray);
+        return myArray;
+    }
+    public void recursiveHelper(TreeNode root, ArrayList<Integer> myArray){
+        if(root == null){
+            return;
         }
-        return max;
+        else if(root.left == null && root.right == null){
+            myArray.add(root.val);
+        }
+        else if(root.left == null){
+            myArray.add(root.val);
+            recursiveHelper(root.right, myArray);
+        }
+        else if(root.right == null){
+            myArray.add(root.val);
+            recursiveHelper(root.left, myArray);
+        }
+        else{
+            myArray.add(root.val);
+            recursiveHelper(root.left, myArray);
+            recursiveHelper(root.right, myArray);
+        }
     }
 
 }
