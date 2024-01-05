@@ -1,24 +1,20 @@
 import java.util.*;
 public class helperObject {
-    public int firstBadVersion(int n) {
-        long min = 1;
-        long max = n;
-        long mid = (1 + n)/2;
-        while(min < max){
-            boolean isBad = isBadVersion((int)mid);
-            if(isBad && isBadVersion((int)mid - 1) == false){
-                return (int)mid;
-            }
-            else if(!isBad){
-                min = mid + 1;
-                mid = (max + min) / 2;
-            }
-            else{
-                max = mid - 1;
-                mid = (max + min) / 2;
+    public boolean canConstruct(String ransomNote, String magazine) {
+        int[] countOne = new int[26];
+        int[] countTwo = new int[26];
+        for(int i = 0; i < magazine.length(); i++){
+            countOne[magazine.charAt(i) - 97]++;
+        }
+        for(int i = 0; i < ransomNote.length(); i++){
+            countTwo[ransomNote.charAt(i) - 97]++;
+        }
+        for(int i = 0; i < 26; i++){
+            if(countTwo[i] > countOne[i]){
+                return false;
             }
         }
-        return (int)min;
+        return true;
     }
 }
 
