@@ -1,32 +1,24 @@
 import java.util.*;
 public class helperObject {
-    // O(nlogn) solution
-    /*
-    public int missingNumber(int[] nums) {
-        Arrays.sort(nums);
-        if(nums[0] != 0){
-            return 0;
-        }
-        for(int i = 0; i < nums.length; i++){
-            if(nums[i] != i){
-                return i;
+    public int firstBadVersion(int n) {
+        long min = 1;
+        long max = n;
+        long mid = (1 + n)/2;
+        while(min < max){
+            boolean isBad = isBadVersion((int)mid);
+            if(isBad && isBadVersion((int)mid - 1) == false){
+                return (int)mid;
+            }
+            else if(!isBad){
+                min = mid + 1;
+                mid = (max + min) / 2;
+            }
+            else{
+                max = mid - 1;
+                mid = (max + min) / 2;
             }
         }
-        return nums.length;
-    }
-    */
-
-    // O(n) solution
-    public int missingNumber(int[] nums) {
-        int eSum = 0;
-        int aSum = 0;
-        for(int i = 0; i < nums.length; i++){
-            eSum += i;
-            aSum += nums[i];
-        }
-        eSum += nums.length;
-        int diff = eSum - aSum;
-        return diff;
+        return (int)min;
     }
 }
 
