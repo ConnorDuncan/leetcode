@@ -1,28 +1,32 @@
 import java.util.*;
 public class helperObject {
-    public boolean isUgly(int n) {
-        if(n <= 0){
-            return false;
+    // O(nlogn) solution
+    /*
+    public int missingNumber(int[] nums) {
+        Arrays.sort(nums);
+        if(nums[0] != 0){
+            return 0;
         }
-        else if(n == 1){
-            return true;
-        }
-        while(n % 2 == 0 || n % 3 == 0 || n % 5 == 0){
-            if(n%5 == 0){
-                n /= 5;
-            }
-            else if(n%3 == 0){
-                n /= 3;
-            }
-            else{
-                n /= 2;
+        for(int i = 0; i < nums.length; i++){
+            if(nums[i] != i){
+                return i;
             }
         }
-        if(n == 1){
-            return true;
-        }
-        return false;
+        return nums.length;
     }
+    */
 
+    // O(n) solution
+    public int missingNumber(int[] nums) {
+        int eSum = 0;
+        int aSum = 0;
+        for(int i = 0; i < nums.length; i++){
+            eSum += i;
+            aSum += nums[i];
+        }
+        eSum += nums.length;
+        int diff = eSum - aSum;
+        return diff;
+    }
 }
 
