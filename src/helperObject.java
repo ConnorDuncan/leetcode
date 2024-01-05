@@ -1,23 +1,29 @@
 import java.util.*;
 public class helperObject {
-    public boolean isIsomorphic(String s, String t) {
-        int[] myMapOne = new int[128];
-        int[] myMapTwo = new int[128];
-        int length = s.length();
-        for(int i = 0; i < length; i++){
-            int sChar = (int)s.charAt(i);
-            int tChar = (int)t.charAt(i);
-            if(myMapOne[sChar] == 0 && myMapTwo[tChar] == 0){
-                myMapOne[sChar] = tChar + 1;
-                myMapTwo[tChar] = sChar + 1;
-            }
-            else{
-                if(myMapOne[sChar] != (tChar + 1) || myMapTwo[tChar] != (sChar + 1)){
-                    return false;
-                }
-            }
+    public ListNode removeElements(ListNode head, int val) {
+        if(head == null){
+            return null;
         }
-        return true;
+        else if(head.next == null){
+            if(head.val == val){
+                return null;
+            }
+            return head;
+        }
+        while(head != null && head.val == val){
+            head = head.next;
+        }
+        if(head == null){
+            return null;
+        }
+        ListNode cur = head;
+        while(cur != null && cur.next != null){
+            while(cur.next != null && cur.next.val == val){
+                cur.next = cur.next.next;
+            }
+            cur = cur.next;
+        }
+        return head;
     }
 
 }
