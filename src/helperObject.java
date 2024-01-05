@@ -1,26 +1,17 @@
 import java.util.*;
 public class helperObject {
-    public boolean isPalindrome(ListNode head) {
-        StringBuilder builder = new StringBuilder();
-        if(head == null){
-            return true;
-        }
-        else if(head.next == null){
-            return true;
-        }
-        while(head.next != null){
-            builder.append(head.val);
-            head = head.next;
-        }
-        builder.append(head.val);
-        String s = builder.toString();
-        int len = s.length();
-        for(int i = 0; i < len / 2; i++){
-            if(s.charAt(i) != s.charAt(len - 1 - i)){
-                return false;
+    public int addDigits(int num) {
+        String s = "" + num;
+        int result = num;
+        while(result > 9){
+            result = 0;
+            for(int i = 0; i < s.length(); i++){
+                int temp = s.charAt(i) - 48;
+                result += temp;
             }
+            s = "" + result;
         }
-        return true;
+        return result;
     }
 
 }
