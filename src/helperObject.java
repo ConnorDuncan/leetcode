@@ -1,24 +1,26 @@
 import java.util.*;
 public class helperObject {
-    public boolean rotateString(String s, String goal) {
-        int counter = 0;
-        if(s.length() == 1){
-            if (goal.equals(s)){
-                return true;
+    public String toGoatLatin(String sentence) {
+        StringBuilder builder = new StringBuilder();
+        String[] words = sentence.split(" ");
+        for(int i = 0; i < words.length; i++){
+            char c = words[i].charAt(0);
+            if(c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u' || c == 'A' || c == 'E' || c == 'I' || c == 'O' || c == 'U'){
+                builder.append(words[i] + "ma");
+
             }
-            return false;
-        }
-        else if(goal.equals(s)){
-            return true;
-        }
-        while(counter < s.length()){
-            if(goal.equals(s)){
-                return true;
+            else{
+                words[i] = words[i].substring(1) + c;
+                builder.append(words[i] + "ma");
             }
-            s = s.substring(1) + s.charAt(0);
-            counter++;
+            for(int j = 0; j < i + 1; j++){
+                builder.append("a");
+            }
+            if(i != words.length - 1){
+                builder.append(" ");
+            }
         }
-        return false;
+        return builder.toString();
     }
 }
 
