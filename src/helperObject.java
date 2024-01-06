@@ -1,28 +1,36 @@
 import java.util.*;
 public class helperObject {
-    public boolean checkRecord(String s) {
-        int[] myInfo = new int[2]; // 0 = 'A' 1 = 'L'
-        int len = s.length();
-        for(int i = 0; i < len; i++){
-            char c = s.charAt(i);
-            if(c == 'A'){
-                myInfo[0]++;
-                myInfo[1] = 0;
+    public int calPoints(String[] operations) {
+        Stack<Integer> myStack = new Stack<Integer>();
+        for(int i = 0; i < operations.length; i++){
+            char c = operations[i].charAt(0);
+            if((c > 47 && c < 58) || c == 45){
+                int record = Integer.parseInt(operations[i]);
+                myStack.push(record);
             }
-            else if(c == 'L'){
-                myInfo[1]++;
-                if(myInfo[1] >= 3){
-                    return false;
-                }
+            else if(c == 43){
+                int record = 0;
+                int temp1 = myStack.pop();
+                int temp2 = myStack.pop();
+                record = temp1+temp2;
+                myStack.push(temp2);
+                myStack.push(temp1);
+                myStack.push(record);
             }
-            else{
-                myInfo[1] = 0;
+            else if(c == 68){
+                int score = myStack.pop();
+                myStack.push(score);
+                myStack.push(score*2);
+            }
+            else if(c == 67){
+                myStack.pop();
             }
         }
-        if(myInfo[0] > 1){
-            return false;
+        int sum = 0;
+        while(!myStack.empty()){
+            sum += myStack.pop();
         }
-        return true;
+        return sum;
     }
 }
 
