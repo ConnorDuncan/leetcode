@@ -1,12 +1,22 @@
 import java.util.*;
 public class helperObject {
-    public char nextGreatestLetter(char[] letters, char target) {
-        for(int i = 0; i < letters.length; i++){
-            if(letters[i] > target){
-                return letters[i];
+    public int dominantIndex(int[] nums) {
+        int max = -1;
+        int index = -1;
+        for(int i = 0; i < nums.length; i++){
+            if(nums[i] > max){
+                max = nums[i];
+                index = i;
             }
         }
-        return letters[0];
+        for(int i = 0; i < nums.length; i++){
+            if(i != index){
+                if(2 * nums[i] > nums[index]){
+                    return -1;
+                }
+            }
+        }
+        return index;
     }
 }
 
