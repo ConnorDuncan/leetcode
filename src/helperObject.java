@@ -1,21 +1,29 @@
 import java.util.*;
 public class helperObject {
-    public boolean hasAlternatingBits(int n) {
-        String s = Integer.toBinaryString(n);
-        boolean firstIsOne = false;
-        if(s.charAt(0) == '1'){
-            firstIsOne = true;
+    public int pivotIndex(int[] nums) {
+        int len = nums.length;
+        if(nums.length == 1){
+            return 0;
         }
-        for(int i = 1; i < s.length(); i++){
-            if(s.charAt(i) == '1' && firstIsOne){
-                return false;
-            }
-            else if(s.charAt(i) == '0' && !firstIsOne){
-                return false;
-            }
-            firstIsOne = !firstIsOne;
+        int[] leftSum = new int[len];
+        int[] rightSum = new int[len];
+        int sum = 0;
+        for(int i = 0; i < len; i++){
+            sum += nums[i];
+            leftSum[i] = sum;
         }
-        return true;
+        sum = 0;
+        for(int i = len - 1; i > -1; i--){
+            sum += nums[i];
+            rightSum[i] = sum;
+        }
+        for(int i = 0; i < len; i++){
+            if(rightSum[i] == leftSum[i]){
+                return i;
+            }
+        }
+        return -1;
+
     }
 }
 
