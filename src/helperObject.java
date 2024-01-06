@@ -1,22 +1,24 @@
 import java.util.*;
 public class helperObject {
-    public int search(int[] nums, int target) {
-        int min = 0;
-        int max = nums.length - 1;
-        int mid = 0;
-        while(min <= max){
-            mid = (min + max) / 2;
-            if(nums[mid] == target){
-                return mid;
+    public boolean rotateString(String s, String goal) {
+        int counter = 0;
+        if(s.length() == 1){
+            if (goal.equals(s)){
+                return true;
             }
-            else if(nums[mid] > target){
-                max = mid - 1;
-            }
-            else{
-                min = mid + 1;
-            }
+            return false;
         }
-        return -1;
+        else if(goal.equals(s)){
+            return true;
+        }
+        while(counter < s.length()){
+            if(goal.equals(s)){
+                return true;
+            }
+            s = s.substring(1) + s.charAt(0);
+            counter++;
+        }
+        return false;
     }
 }
 
