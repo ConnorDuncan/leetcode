@@ -1,17 +1,22 @@
 import java.util.*;
 public class helperObject {
-    public int numJewelsInStones(String jewels, String stones) {
-        HashSet<Character> mySet = new HashSet<Character>();
-        int total = 0;
-        for(int i = 0; i < jewels.length(); i++){
-            mySet.add(jewels.charAt(i));
-        }
-        for(int i = 0; i < stones.length(); i++){
-            if(mySet.contains(stones.charAt(i))){
-                total++;
+    public int search(int[] nums, int target) {
+        int min = 0;
+        int max = nums.length - 1;
+        int mid = 0;
+        while(min <= max){
+            mid = (min + max) / 2;
+            if(nums[mid] == target){
+                return mid;
+            }
+            else if(nums[mid] > target){
+                max = mid - 1;
+            }
+            else{
+                min = mid + 1;
             }
         }
-        return total;
+        return -1;
     }
 }
 
