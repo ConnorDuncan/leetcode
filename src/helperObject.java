@@ -1,21 +1,22 @@
 import java.util.*;
 public class helperObject {
-    public boolean isSubsequence(String s, String t) {
-        int i = 0;
-        int j = 0;
-        while(i < s.length() && j < t.length()){
-            if(s.charAt(i) == t.charAt(j)){
-                i++;
-                j++;
+    public List<String> fizzBuzz(int n) {
+        ArrayList<String> myList = new ArrayList<String>();
+        for(int i = 1; i <= n; i++){
+            if(i % 3 == 0 && i % 5 == 0){
+                myList.add("FizzBuzz");
+            }
+            else if(i % 3 == 0){
+                myList.add("Fizz");
+            }
+            else if(i % 5 == 0){
+                myList.add("Buzz");
             }
             else{
-                j++;
+                myList.add("" + i);
             }
         }
-        if(i < s.length()){
-            return false;
-        }
-        return true;
+        return myList;
     }
 }
 
