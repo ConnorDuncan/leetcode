@@ -1,23 +1,16 @@
 import java.util.*;
 public class helperObject {
-    public List<Integer> selfDividingNumbers(int left, int right) {
-        ArrayList<Integer> selfDividing = new ArrayList<Integer>();
-        for(int i = left; i <= right; i++){
-            String s = "" + i;
-            int len = s.length();
-            boolean selfDividingB = true;
-            for(int k = 0; k < len; k++){
-                char c = s.charAt(k);
-                int j = Integer.parseInt("" + c);
-                if(j == 0 || i % j != 0){
-                    selfDividingB = false;
-                }
+    public String toLowerCase(String s) {
+        int len = s.length();
+        StringBuilder builder = new StringBuilder();
+        for(int i = 0; i < len; i++){
+            char c = s.charAt(i);
+            if(c >= 'A' && c <= 'Z'){
+                c += 32;
             }
-            if(selfDividingB){
-                selfDividing.add(i);
-            }
+            builder.append(c);
         }
-        return selfDividing;
+        return builder.toString();
     }
 }
 
