@@ -1,29 +1,23 @@
 import java.util.*;
 public class helperObject {
-    public int pivotIndex(int[] nums) {
-        int len = nums.length;
-        if(nums.length == 1){
-            return 0;
-        }
-        int[] leftSum = new int[len];
-        int[] rightSum = new int[len];
-        int sum = 0;
-        for(int i = 0; i < len; i++){
-            sum += nums[i];
-            leftSum[i] = sum;
-        }
-        sum = 0;
-        for(int i = len - 1; i > -1; i--){
-            sum += nums[i];
-            rightSum[i] = sum;
-        }
-        for(int i = 0; i < len; i++){
-            if(rightSum[i] == leftSum[i]){
-                return i;
+    public List<Integer> selfDividingNumbers(int left, int right) {
+        ArrayList<Integer> selfDividing = new ArrayList<Integer>();
+        for(int i = left; i <= right; i++){
+            String s = "" + i;
+            int len = s.length();
+            boolean selfDividingB = true;
+            for(int k = 0; k < len; k++){
+                char c = s.charAt(k);
+                int j = Integer.parseInt("" + c);
+                if(j == 0 || i % j != 0){
+                    selfDividingB = false;
+                }
+            }
+            if(selfDividingB){
+                selfDividing.add(i);
             }
         }
-        return -1;
-
+        return selfDividing;
     }
 }
 
