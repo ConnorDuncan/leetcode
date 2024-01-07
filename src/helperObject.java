@@ -1,13 +1,13 @@
 import java.util.*;
 public class helperObject {
-    public int fib(int n) {
-        if(n == 0){
-            return 0;
+    public int[] sortedSquares(int[] nums) {
+        int len = nums.length;
+        int[] returnarr = new int[len];
+        for(int i = 0; i < len; i++){
+            returnarr[i] = nums[i] * nums[i];
         }
-        if(n == 1 || n == 2){
-            return 1;
-        }
-        return fib(n-1) + fib(n-2);
+        Arrays.sort(returnarr);
+        return returnarr;
     }
 }
 
