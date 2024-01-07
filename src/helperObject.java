@@ -1,60 +1,110 @@
 import java.util.*;
 public class helperObject {
-    public String intToRoman(int num) {
-        StringBuilder builder = new StringBuilder();
-        while(num / 1000 > 0){
-            builder.append("M");
-            num -= 1000;
+    public List<String> letterCombinations(String digits) {
+        String[] twos = new String[]{"a", "b", "c"};
+        String[] threes = new String[]{"d", "e", "f"};
+        String[] fours = new String[]{"g", "h", "i"};
+        String[] fives = new String[]{"j", "k", "l"};
+        String[] sixes = new String[]{"m", "n", "o"};
+        String[] sevens = new String[]{"p", "q", "r", "s"};
+        String[] eights = new String[]{"t", "u", "v"};
+        String[] nines = new String[]{"w", "x", "y", "z"};
+        ArrayList<String> results = new ArrayList<String>();
+        int len = digits.length();
+        if(len == 0){
+            return results;
         }
-        while(num / 900 > 0){
-            builder.append("CM");
-            num -= 900;
+        char c = digits.charAt(0);
+        if(c - 50 == 0){ // twos
+            for(String s : twos){
+                results.add(s);
+            }
         }
-        while(num / 500 > 0){
-            builder.append("D");
-            num -= 500;
+        else if(c - 50 == 1){ // threes
+            for(String s : threes){
+                results.add(s);
+            }
         }
-        while(num / 400 > 0){
-            builder.append("CD");
-            num -= 400;
+        else if(c - 50 == 2){ // fours
+            for(String s : fours){
+                results.add(s);
+            }
         }
-        while(num / 100 > 0){
-            builder.append("C");
-            num -= 100;
+        else if(c - 50 == 3){ // fives
+            for(String s : fives){
+                results.add(s);
+            }
         }
-        while(num / 90 > 0){
-            builder.append("XC");
-            num -= 90;
+        else if(c - 50 == 4){ // sixes
+            for(String s : sixes){
+                results.add(s);
+            }
         }
-        while(num / 50 > 0){
-            builder.append("L");
-            num -= 50;
+        else if(c - 50 == 5){ // sevens
+            for(String s : sevens){
+                results.add(s);
+            }
         }
-        while(num / 40 > 0){
-            builder.append("XL");
-            num -= 40;
+        else if(c - 50 == 6){ // eights
+            for(String s : eights){
+                results.add(s);
+            }
         }
-        while(num / 10 > 0){
-            builder.append("X");
-            num -= 10;
+        else{ // nines
+            for(String s : nines){
+                results.add(s);
+            }
         }
-        while(num / 9 > 0){
-            builder.append("IX");
-            num -= 9;
+        for(int i = 1; i < len; i++){
+            ArrayList<String> newResults = new ArrayList<String>();
+            c = digits.charAt(i);
+            for(String result : results){
+                if(c - 50 == 0){ // twos
+                    for(String s : twos){
+                        newResults.add(result + s);
+                    }
+                }
+                else if(c - 50 == 1){ // threes
+                    for(String s : threes){
+                        newResults.add(result + s);
+                    }
+                }
+                else if(c - 50 == 2){ // fours
+                    for(String s : fours){
+                        newResults.add(result + s);
+                    }
+                }
+                else if(c - 50 == 3){ // fives
+                    for(String s : fives){
+                        newResults.add(result + s);
+                    }
+                }
+                else if(c - 50 == 4){ // sixes
+                    for(String s : sixes){
+                        newResults.add(result + s);
+                    }
+                }
+                else if(c - 50 == 5){ // sevens
+                    for(String s : sevens){
+                        newResults.add(result + s);
+                    }
+                }
+                else if(c - 50 == 6){ // eights
+                    for(String s : eights){
+                        newResults.add(result + s);
+                    }
+                }
+                else{ // nines
+                    for(String s : nines){
+                        newResults.add(result + s);
+                    }
+                }
+            }
+            results = newResults;
         }
-        while(num / 5 > 0){
-            builder.append("V");
-            num -= 5;
-        }
-        while(num / 4 > 0){
-            builder.append("IV");
-            num -= 4;
-        }
-        while(num / 1 > 0){
-            builder.append("I");
-            num -= 1;
-        }
-        return builder.toString();
+
+
+        return results;
     }
 }
 
