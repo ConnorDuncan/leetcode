@@ -1,37 +1,39 @@
 import java.util.*;
 public class helperObject {
-    public String largestGoodInteger(String num) {
-        if(num.contains("999")){
-            return "999";
+    public int lastStoneWeight(int[] stones) {
+        if(stones.length == 1){
+            return stones[0];
         }
-        else if(num.contains("888")){
-            return "888";
+        PriorityQueue<Integer> myQ = new PriorityQueue<Integer>(Collections.reverseOrder());
+        for(int i : stones){
+            myQ.add(i);
         }
-        else if(num.contains("777")){
-            return "777";
+        int stoneOne = myQ.poll();
+        int stoneTwo = myQ.poll();
+        if(stoneOne != stoneTwo){
+            if(stoneOne > stoneTwo){
+                myQ.add(stoneOne - stoneTwo);
+            }
+            else{
+                myQ.add(stoneTwo - stoneOne);
+            }
         }
-        else if(num.contains("666")){
-            return "666";
+        while(myQ.size() >= 2){
+            stoneOne = myQ.poll();
+            stoneTwo = myQ.poll();
+            if(stoneOne != stoneTwo){
+                if(stoneOne > stoneTwo){
+                    myQ.add(stoneOne - stoneTwo);
+                }
+                else{
+                    myQ.add(stoneTwo - stoneOne);
+                }
+            }
         }
-        else if(num.contains("555")){
-            return "555";
+        if(myQ.size() == 0){
+            return 0;
         }
-        else if(num.contains("444")){
-            return "444";
-        }
-        else if(num.contains("333")){
-            return "333";
-        }
-        else if(num.contains("222")){
-            return "222";
-        }
-        else if(num.contains("111")){
-            return "111";
-        }
-        else if(num.contains("000")){
-            return "000";
-        }
-        return "";
+        return myQ.poll();
     }
 }
 
