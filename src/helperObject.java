@@ -1,32 +1,13 @@
 import java.util.*;
 public class helperObject {
-    public int numUniqueEmails(String[] emails) {
-        HashSet<String> validEmails = new HashSet<String>();
-        for(String s : emails){
-            String[] splitArr = s.split("@"); // 1 is domain, 0 is local name
-            boolean reading = true;
-            StringBuilder builder = new StringBuilder();
-            for(int i = 0; i < splitArr[0].length(); i++){
-                if(reading){
-                    char c = splitArr[0].charAt(i);
-                    if(c == '.'){
-
-                    }
-                    else if(c == '+'){
-                        reading = false;
-                    }
-                    else{ //alphabet character
-                        builder.append(c);
-                    }
-                }
-            }
-            validEmails.add(builder.toString() + "@" + splitArr[1]);
+    public int fib(int n) {
+        if(n == 0){
+            return 0;
         }
-        int sum = 0;
-        for(String s : validEmails){
-            sum++;
+        if(n == 1 || n == 2){
+            return 1;
         }
-        return sum;
+        return fib(n-1) + fib(n-2);
     }
 }
 
