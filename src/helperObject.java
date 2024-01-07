@@ -1,39 +1,60 @@
 import java.util.*;
 public class helperObject {
-    public int lastStoneWeight(int[] stones) {
-        if(stones.length == 1){
-            return stones[0];
+    public String intToRoman(int num) {
+        StringBuilder builder = new StringBuilder();
+        while(num / 1000 > 0){
+            builder.append("M");
+            num -= 1000;
         }
-        PriorityQueue<Integer> myQ = new PriorityQueue<Integer>(Collections.reverseOrder());
-        for(int i : stones){
-            myQ.add(i);
+        while(num / 900 > 0){
+            builder.append("CM");
+            num -= 900;
         }
-        int stoneOne = myQ.poll();
-        int stoneTwo = myQ.poll();
-        if(stoneOne != stoneTwo){
-            if(stoneOne > stoneTwo){
-                myQ.add(stoneOne - stoneTwo);
-            }
-            else{
-                myQ.add(stoneTwo - stoneOne);
-            }
+        while(num / 500 > 0){
+            builder.append("D");
+            num -= 500;
         }
-        while(myQ.size() >= 2){
-            stoneOne = myQ.poll();
-            stoneTwo = myQ.poll();
-            if(stoneOne != stoneTwo){
-                if(stoneOne > stoneTwo){
-                    myQ.add(stoneOne - stoneTwo);
-                }
-                else{
-                    myQ.add(stoneTwo - stoneOne);
-                }
-            }
+        while(num / 400 > 0){
+            builder.append("CD");
+            num -= 400;
         }
-        if(myQ.size() == 0){
-            return 0;
+        while(num / 100 > 0){
+            builder.append("C");
+            num -= 100;
         }
-        return myQ.poll();
+        while(num / 90 > 0){
+            builder.append("XC");
+            num -= 90;
+        }
+        while(num / 50 > 0){
+            builder.append("L");
+            num -= 50;
+        }
+        while(num / 40 > 0){
+            builder.append("XL");
+            num -= 40;
+        }
+        while(num / 10 > 0){
+            builder.append("X");
+            num -= 10;
+        }
+        while(num / 9 > 0){
+            builder.append("IX");
+            num -= 9;
+        }
+        while(num / 5 > 0){
+            builder.append("V");
+            num -= 5;
+        }
+        while(num / 4 > 0){
+            builder.append("IV");
+            num -= 4;
+        }
+        while(num / 1 > 0){
+            builder.append("I");
+            num -= 1;
+        }
+        return builder.toString();
     }
 }
 
