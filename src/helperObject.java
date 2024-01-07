@@ -1,110 +1,56 @@
 import java.util.*;
 public class helperObject {
-    public List<String> letterCombinations(String digits) {
-        String[] twos = new String[]{"a", "b", "c"};
-        String[] threes = new String[]{"d", "e", "f"};
-        String[] fours = new String[]{"g", "h", "i"};
-        String[] fives = new String[]{"j", "k", "l"};
-        String[] sixes = new String[]{"m", "n", "o"};
-        String[] sevens = new String[]{"p", "q", "r", "s"};
-        String[] eights = new String[]{"t", "u", "v"};
-        String[] nines = new String[]{"w", "x", "y", "z"};
-        ArrayList<String> results = new ArrayList<String>();
-        int len = digits.length();
-        if(len == 0){
-            return results;
-        }
-        char c = digits.charAt(0);
-        if(c - 50 == 0){ // twos
-            for(String s : twos){
-                results.add(s);
-            }
-        }
-        else if(c - 50 == 1){ // threes
-            for(String s : threes){
-                results.add(s);
-            }
-        }
-        else if(c - 50 == 2){ // fours
-            for(String s : fours){
-                results.add(s);
-            }
-        }
-        else if(c - 50 == 3){ // fives
-            for(String s : fives){
-                results.add(s);
-            }
-        }
-        else if(c - 50 == 4){ // sixes
-            for(String s : sixes){
-                results.add(s);
-            }
-        }
-        else if(c - 50 == 5){ // sevens
-            for(String s : sevens){
-                results.add(s);
-            }
-        }
-        else if(c - 50 == 6){ // eights
-            for(String s : eights){
-                results.add(s);
-            }
-        }
-        else{ // nines
-            for(String s : nines){
-                results.add(s);
-            }
-        }
-        for(int i = 1; i < len; i++){
-            ArrayList<String> newResults = new ArrayList<String>();
-            c = digits.charAt(i);
-            for(String result : results){
-                if(c - 50 == 0){ // twos
-                    for(String s : twos){
-                        newResults.add(result + s);
+    public boolean isValidSudoku(char[][] board) {
+        int[] count = new int[9];
+        for(int i = 0; i < 3; i++){
+            for(int j = 0; j < 3; j++){
+                char[] chars = new char[9];
+                chars[0] = board[0 + (3*i)][0 + (3*j)];
+                chars[1] = board[0 + (3*i)][1 + (3*j)];
+                chars[2] = board[0 + (3*i)][2 + (3*j)];
+                chars[3] = board[1 + (3*i)][0 + (3*j)];
+                chars[4] = board[1 + (3*i)][1 + (3*j)];
+                chars[5] = board[1 + (3*i)][2 + (3*j)];
+                chars[6] = board[2 + (3*i)][0 + (3*j)];
+                chars[7] = board[2 + (3*i)][1 + (3*j)];
+                chars[8] = board[2 + (3*i)][2 + (3*j)];
+                for(char c : chars){
+                    if(c != '.'){
+                        if(count[c - 49] == 1){
+                            return false;
+                        }
+                        count[c - 49]++;
                     }
                 }
-                else if(c - 50 == 1){ // threes
-                    for(String s : threes){
-                        newResults.add(result + s);
-                    }
-                }
-                else if(c - 50 == 2){ // fours
-                    for(String s : fours){
-                        newResults.add(result + s);
-                    }
-                }
-                else if(c - 50 == 3){ // fives
-                    for(String s : fives){
-                        newResults.add(result + s);
-                    }
-                }
-                else if(c - 50 == 4){ // sixes
-                    for(String s : sixes){
-                        newResults.add(result + s);
-                    }
-                }
-                else if(c - 50 == 5){ // sevens
-                    for(String s : sevens){
-                        newResults.add(result + s);
-                    }
-                }
-                else if(c - 50 == 6){ // eights
-                    for(String s : eights){
-                        newResults.add(result + s);
-                    }
-                }
-                else{ // nines
-                    for(String s : nines){
-                        newResults.add(result + s);
-                    }
-                }
-            }
-            results = newResults;
-        }
 
-
-        return results;
+                count = new int[9];
+            }
+        }
+        for(int i = 0; i < 9; i++){
+            for(int j = 0; j < 9; j++){
+                char c = board[i][j];
+                if(c != '.'){
+                    if(count[c - 49] > 0){
+                        return false;
+                    }
+                    count[c - 49]++;
+                }
+            }
+            count = new int[9];
+        }
+        for(int i = 0; i < 9; i++){
+            for(int j = 0; j < 9; j++){
+                char c = board[j][i];
+                if(c != '.'){
+                    if(count[c - 49] > 0){
+                        return false;
+                    }
+                    count[c - 49]++;
+                }
+            }
+            count = new int[9];
+        }
+        return true;
     }
 }
 
